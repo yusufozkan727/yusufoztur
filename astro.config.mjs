@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 // Prod'da GitHub Pages alt dizini, dev'de kök
 const isProd = process.env.NODE_ENV === 'production';
 const site = isProd
-  ? 'https://yusufoztekin.github.io/yusufoztur'
+  ? 'https://yusufozkan727.github.io/yusufoztur'
   : 'http://localhost:4321';
 const base = isProd ? '/yusufoztur' : '/';
 

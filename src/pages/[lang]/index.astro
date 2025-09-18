@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Navbar from '@components/Navbar.astro';
 import stringsTr from '@i18n/tr.json';
@@ -20,14 +20,17 @@ const langParam = Astro.params.lang;
 const lang: Lang = isLang(langParam) ? (langParam as Lang) : 'tr';
 const dict = lang === 'en' ? stringsEn : lang === 'pl' ? stringsPl : stringsTr;
 const BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
-const site = import.meta.env.SITE || 'http://localhost:4321';
+// Canonical host for GitHub Pages deployment (no www)
+const HOST = 'https://yusufozkan727.github.io';
+const site = HOST;
+const canonical = `${HOST}/yusufoztur/${lang}/`;
 const alternates = [
   { hrefLang: 'tr', href: new URL(`${BASE}tr/`, site).toString() },
   { hrefLang: 'en', href: new URL(`${BASE}en/`, site).toString() },
   { hrefLang: 'pl', href: new URL(`${BASE}pl/`, site).toString() },
   { hrefLang: 'x-default', href: new URL(`${BASE}tr/`, site).toString() },
 ];
-const description = 'Licensed tour guide in Istanbul. Private tours in TR/EN/PL.';
+const description = 'Lisanslı tur rehberi Yusuf Özkan ile İstanbul’un tarihî ve kültürel mirasını keşfedin. TR/EN/PL özel turlar, esnek rota, WhatsApp ile hızlı iletişim ve kişiye özel deneyim.';
 
 const settings = loadSettings();
 const places = loadPlaces(lang);
@@ -41,35 +44,44 @@ const email = settings.email || 'yusuf.ozkan@example.com';
 const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURIComponent('Merhaba! Özel tur hakkında bilgi almak istiyorum.')}`;
 ---
 <BaseLayout title={dict.siteTitle} lang={lang}>
-  <Fragment slot="head">
+    <Fragment slot="head">
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+    <!-- Meta -->
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(`${BASE}${lang}/`, site).toString()} />
-    <link rel="alternate" hrefLang="tr" href={alternates[0].href} />
-    <link rel="alternate" hrefLang="en" href={alternates[1].href} />
-    <link rel="alternate" hrefLang="pl" href={alternates[2].href} />
-    <link rel="alternate" hrefLang="x-default" href={alternates[3].href} />
-    {averageRating && (
-      <script type="application/ld+json">{JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'AggregateRating',
-        itemReviewed: {
-          '@type': 'LocalBusiness',
-          name: settings.owner_name || 'Yusuf Özkan',
-          url: new URL(`${BASE}${lang}/`, site).toString()
-        },
-        ratingValue: Number(averageRating),
-        reviewCount
-      })}</script>
-    )}
+    <link rel="alternate" hrefLang="tr" href=\{`    <link rel="alternate" hrefLang="tr" href={HOST`}/yusufoztur/tr/} />
+    <link rel="alternate" hrefLang="en" href=\{`    <link rel="alternate" hrefLang="en" href={HOST`}/yusufoztur/en/} />
+    <link rel="alternate" hrefLang="pl" href=\{`    <link rel="alternate" hrefLang="pl" href={HOST`}/yusufoztur/pl/} />
+    <link rel="alternate" hrefLang="x-default" href=\{`    <link rel="alternate" hrefLang="x-default" href={HOST`}/yusufoztur/tr/} />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="İstanbul Özel Turlar — Yusuf Özkan" />
+    <meta property="og:description" content="Lisanslı tur rehberi Yusuf Özkan ile İstanbul’un tarihî ve kültürel mirasını keşfedin. TR/EN/PL özel turlar." />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content=\{`    <meta property="og:image" content={HOST`}/yusufoztur/images/sample1.jpg} />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="İstanbul Özel Turlar — Yusuf Özkan" />
+    <meta name="twitter:description" content="Lisanslı tur rehberi Yusuf Özkan ile İstanbul’un tarihî ve kültürel mirasını keşfedin. TR/EN/PL özel turlar." />
+    <meta name="twitter:image" content=\{`    <meta name="twitter:image" content={HOST`}/yusufoztur/images/sample1.jpg} />
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json">{JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Yusuf Özkan',
+      jobTitle: 'Tour Guide',
+      knowsLanguage: ['tr','en','pl'],
+      url: canonical
+    })}</script>
+    <!-- JSON-LD: LocalBusiness -->
     <script type="application/ld+json">{JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
-      name: settings.owner_name || 'Yusuf Özkan',
-      description,
-      url: new URL(`${BASE}${lang}/`, site).toString(),
+      name: 'Yusuf Özkan — İstanbul Özel Turlar',
+      url: canonical,
       areaServed: 'Istanbul',
-      email: settings.email,
-      sameAs: Object.values(settings.socials || {}).filter(Boolean),
+      image: `${HOST}/yusufoztur/images/sample1.jpg`,
+      sameAs: Object.values(settings.socials || {}).filter(Boolean)
     })}</script>
   </Fragment>
   <Navbar lang={lang} />

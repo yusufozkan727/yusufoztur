@@ -9,7 +9,7 @@ const { waHref, email } = Astro.props as { waHref: string; email: string };
   <div class="max-w-lg mx-auto bg-white dark:bg-background-dark rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
     <div class="p-8">
       <div class="flex flex-col sm:flex-row gap-4 mb-8">
-        <a target="_blank" href={waHref} class="w-full flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 transition-colors">WhatsApp</a>
+        <a target="_blank" rel="noopener noreferrer" href={waHref} class="w-full flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 transition-colors">WhatsApp</a>
         <a href={`mailto:${email}`} class="w-full flex items-center justify-center gap-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Email</a>
       </div>
       <form onsubmit="event.preventDefault(); alert('Thanks!');">
@@ -34,4 +34,3 @@ const { waHref, email } = Astro.props as { waHref: string; email: string };
     </div>
   </div>
 </section>
-
