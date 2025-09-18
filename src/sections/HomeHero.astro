@@ -14,8 +14,9 @@ const { lang, title, subtitle, waHref, ctaPrimary, ctaSecondary } = Astro.props 
     <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md">{subtitle}</p>
     <div class="mt-8 flex items-center justify-center gap-3">
       <a href={waHref} class="rounded-lg h-12 px-6 inline-flex items-center justify-center bg-primary text-white text-base font-bold shadow-lg hover:bg-primary/90 transition">{ctaPrimary}</a>
-      <a href={`/${lang}#places`} class="rounded-lg h-12 px-6 inline-flex items-center justify-center bg-white/90 text-gray-900 font-semibold hover:bg-white">{ctaSecondary}</a>
+      {(() => { const BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/'); return (
+        <a href={`${BASE}${lang}/#places`} class="rounded-lg h-12 px-6 inline-flex items-center justify-center bg-white/90 text-gray-900 font-semibold hover:bg-white">{ctaSecondary}</a>
+      ); })()}
     </div>
   </div>
 </section>
-

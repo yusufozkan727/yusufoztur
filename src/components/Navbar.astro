@@ -16,7 +16,7 @@ const base = `${BASE}${lang}`;
 ---
 <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm shadow-sm">
   <div class="container-max py-4 flex items-center justify-between">
-    <a href={`${base}#home`} class="flex items-center gap-3 text-primary">
+    <a href={`${base}/#home`} class="flex items-center gap-3 text-primary">
       <svg class="h-6 w-6" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_6_319)"><path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path></g>
         <defs><clipPath id="clip0_6_319"><rect fill="white" height="48" width="48"></rect></clipPath></defs>
@@ -24,12 +24,12 @@ const base = `${BASE}${lang}`;
       <span class="text-xl font-bold text-gray-900 dark:text-white">Yusuf Özkan</span>
     </a>
     <nav class="hidden md:flex items-center gap-8">
-      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}#home`}>{dict.nav.home ?? 'Home'}</a>
-      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}#about`}>{dict.nav.about}</a>
-      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}#places`}>{dict.nav.places}</a>
-      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}#gallery`}>{dict.nav.gallery}</a>
-      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}#testimonials`}>{dict.nav.testimonials}</a>
-      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}#contact`}>{dict.nav.contact}</a>
+      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}/#home`}>{dict.nav.home ?? 'Home'}</a>
+      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}/#about`}>{dict.nav.about}</a>
+      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}/#places`}>{dict.nav.places}</a>
+      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}/#gallery`}>{dict.nav.gallery}</a>
+      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}/#testimonials`}>{dict.nav.testimonials}</a>
+      <a class="text-sm font-medium hover:text-primary transition-colors" href={`${base}/#contact`}>{dict.nav.contact}</a>
     </nav>
     <details class="relative">
       <summary class="list-none flex items-center justify-center rounded-lg h-10 px-4 bg-primary/10 dark:bg-primary/20 text-primary text-sm font-bold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors cursor-pointer select-none">
@@ -37,9 +37,9 @@ const base = `${BASE}${lang}`;
         <span class="material-symbols-outlined ml-1 !text-base">expand_more</span>
       </summary>
       <div class="absolute right-0 mt-2 w-28 bg-white dark:bg-background-dark rounded-lg shadow-lg overflow-hidden border border-black/5">
-        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}en#home`}>EN</a>
-        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}pl#home`}>PL</a>
-        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}tr#home`}>TR</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}en/#home`}>EN</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}pl/#home`}>PL</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}tr/#home`}>TR</a>
       </div>
     </details>
   </div>
