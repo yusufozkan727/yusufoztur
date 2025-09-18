@@ -5,12 +5,15 @@ const year = new Date().getFullYear();
   <div class="container-max py-8 text-sm text-slate-600 flex items-center justify-between">
     <p>© {year} Yusuf Özkan — İstanbul Özel Turlar</p>
     <p>
-      <a class="hover:underline" href="/en">EN</a>
-      <span class="mx-1">·</span>
-      <a class="hover:underline" href="/pl">PL</a>
-      <span class="mx-1">·</span>
-      <a class="hover:underline" href="/tr">TR</a>
+      {(() => { const BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/'); return (
+        <>
+          <a class="hover:underline" href={`${BASE}en`}>EN</a>
+          <span class="mx-1">·</span>
+          <a class="hover:underline" href={`${BASE}pl`}>PL</a>
+          <span class="mx-1">·</span>
+          <a class="hover:underline" href={`${BASE}tr`}>TR</a>
+        </>
+      );})()}
     </p>
   </div>
 </footer>
-

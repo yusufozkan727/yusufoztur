@@ -11,7 +11,8 @@ const dict = ((): any => {
   return stringsTr;
 })();
 
-const base = `/${lang}`;
+const BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const base = `${BASE}${lang}`;
 ---
 <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm shadow-sm">
   <div class="container-max py-4 flex items-center justify-between">
@@ -36,9 +37,9 @@ const base = `/${lang}`;
         <span class="material-symbols-outlined ml-1 !text-base">expand_more</span>
       </summary>
       <div class="absolute right-0 mt-2 w-28 bg-white dark:bg-background-dark rounded-lg shadow-lg overflow-hidden border border-black/5">
-        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href="/en#home">EN</a>
-        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href="/pl#home">PL</a>
-        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href="/tr#home">TR</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}en#home`}>EN</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}pl#home`}>PL</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-background-dark/50" href={`${BASE}tr#home`}>TR</a>
       </div>
     </details>
   </div>
