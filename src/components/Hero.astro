@@ -1,0 +1,25 @@
+---
+const { title, subtitle, primaryHref, primaryText, secondaryHref, secondaryText, image } = Astro.props as {
+  title: string;
+  subtitle?: string;
+  primaryHref?: string;
+  primaryText?: string;
+  secondaryHref?: string;
+  secondaryText?: string;
+  image?: string;
+};
+---
+<section class="bg-gradient-to-b from-primary-50 to-white">
+  <div class="container-max grid md:grid-cols-2 gap-8 py-12 items-center">
+    <div>
+      <h1 class="text-3xl md:text-5xl font-bold tracking-tight">{title}</h1>
+      {subtitle && <p class="mt-4 text-slate-600 text-lg">{subtitle}</p>}
+      <div class="mt-6 flex gap-3">
+        {primaryHref && <a href={primaryHref} class="inline-flex items-center justify-center rounded-md bg-primary-600 px-4 py-2 text-white hover:bg-primary-700">{primaryText ?? 'WhatsApp'}</a>}
+        {secondaryHref && <a href={secondaryHref} class="inline-flex items-center justify-center rounded-md border px-4 py-2 text-primary-700 border-primary-200 hover:bg-primary-50">{secondaryText ?? 'Explore'}</a>}
+      </div>
+    </div>
+    {image && <img src={image} alt="" class="rounded-lg shadow-md w-full h-auto" />}
+  </div>
+</section>
+

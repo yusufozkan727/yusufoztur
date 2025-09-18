@@ -1,0 +1,25 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { fallbackLang } from '@lib/i18n';
+const lang = fallbackLang();
+---
+<BaseLayout title="Istanbul Private Tours" lang={lang}>
+  <script>
+    const supported = ["tr","en","pl"];
+    try {
+      const stored = localStorage.getItem('lang');
+      const navLang = stored || (navigator.language || 'tr').slice(0,2);
+      const to = supported.includes(navLang) ? `/${navLang}` : '/tr';
+      if (location.pathname === '/' && to !== '/') location.replace(to);
+    } catch (e) {}
+  </script>
+  <div class="container-max py-16">
+    <h1 class="text-3xl font-semibold mb-6">Select Language / Dil Seçimi / Wybierz język</h1>
+    <div class="flex gap-4">
+      <a class="px-4 py-2 border rounded hover:bg-primary-50" href="/tr">Türkçe</a>
+      <a class="px-4 py-2 border rounded hover:bg-primary-50" href="/en">English</a>
+      <a class="px-4 py-2 border rounded hover:bg-primary-50" href="/pl">Polski</a>
+    </div>
+  </div>
+</BaseLayout>
+

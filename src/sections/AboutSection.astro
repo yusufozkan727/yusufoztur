@@ -1,0 +1,17 @@
+---
+const { ownerName = 'Yusuf Özkan', ownerTitle = 'Licensed Tour Guide' } = Astro.props as { ownerName?: string; ownerTitle?: string };
+---
+<section id="about" class="scroll-mt-16 container-max py-16">
+  <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+    <div class="lg:col-span-2">
+      <div class="rounded-xl overflow-hidden shadow-lg">
+        <img src="https://picsum.photos/seed/guide/800/1000" alt={`Portrait of ${ownerName}`} class="w-full h-full object-cover" />
+      </div>
+    </div>
+    <div class="lg:col-span-3">
+      <h2 class="text-4xl lg:text-5xl font-bold text-primary dark:text-white mb-4">{ownerName} — {ownerTitle}</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Merhaba! İstanbul'un büyüsünü özel turlarla keşfetmenize yardımcı oluyorum. Tarih ve kültüre olan tutkumla, her turu size özel planlıyorum.</p>
+    </div>
+  </div>
+</section>
+

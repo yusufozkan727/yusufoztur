@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App-level primitives */
+:root {
+  --max-w: 1200px;
+}
+
+.container-max {
+  @apply max-w-[var(--max-w)] mx-auto px-4;
+}
+
+html {
+  scroll-behavior: smooth;
+}

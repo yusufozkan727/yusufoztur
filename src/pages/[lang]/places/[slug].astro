@@ -1,0 +1,91 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import { isLang, type Lang } from '@lib/i18n';
+import { SUPPORTED_LANGUAGES } from '@lib/i18n';
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../../../../content/places/*.md', { eager: true });
+  const entries = Object.values(modules) as any[];
+  const paths: { params: { lang: string; slug: string } }[] = [];
+  for (const mod of entries) {
+    const fm = (mod as any).frontmatter;
+    if (fm?.slug && fm?.lang) {
+      paths.push({ params: { lang: fm.lang, slug: fm.slug } });
+    }
+  }
+  return paths;
+}
+
+const langParam = Astro.params.lang;
+const slug = Astro.params.slug as string;
+const lang: Lang = isLang(langParam) ? (langParam as Lang) : 'tr';
+
+const modules = import.meta.glob('../../../../content/places/*.md');
+let page: any = null;
+for (const [path, loader] of Object.entries(modules)) {
+  const mod: any = await loader();
+  if (mod.frontmatter.slug === slug && mod.frontmatter.lang === lang) {
+    page = mod;
+    break;
+  }
+}
+
+if (!page) {
+  throw new Error('Place not found');
+}
+
+const { frontmatter, Content } = page;
+---
+<BaseLayout title={frontmatter.title} lang={lang}>
+  <Navbar lang={lang} />
+  <main class="container-max py-8">
+    {frontmatter.cover && (
+      <div class="w-full h-96 rounded-xl bg-cover bg-center mb-8" style={`background-image: url('${frontmatter.cover}')`}></div>
+    )}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <article class="md:col-span-2">
+        <h1 class="text-4xl font-bold mb-4">{frontmatter.title}</h1>
+        <div class="space-y-4 text-gray-800 dark:text-gray-100 leading-relaxed">
+          <Content />
+        </div>
+      </article>
+      <aside>
+        <div class="sticky top-24 p-6 rounded-xl bg-primary/5 dark:bg-primary/10">
+          <h3 class="text-xl font-bold mb-4">Practical Information</h3>
+          <div class="space-y-4 text-sm">
+            <div class="border-t border-primary/10 dark:border-primary/20 pt-4">
+              <p class="font-semibold text-primary/70 dark:text-white/70">Opening Hours</p>
+              <p>{frontmatter.open || '—'}</p>
+            </div>
+            <div class="border-t border-primary/10 dark:border-primary/20 pt-4">
+              <p class="font-semibold text-primary/70 dark:text-white/70">Location</p>
+              <p>{frontmatter.location?.name || '—'}</p>
+            </div>
+            <div class="border-t border-primary/10 dark:border-primary/20 pt-4">
+              <p class="font-semibold text-primary/70 dark:text-white/70">Ticket Notes</p>
+              <p>{frontmatter.ticket || '—'}</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="mt-20">
+      <h3 class="text-2xl font-bold mb-6">Related Locations</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {Array.from({length: 3}).map((_, i) => (
+          <div class="group">
+            <div class="overflow-hidden rounded-lg">
+              <div class="w-full aspect-video bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style={`background-image: url('https://picsum.photos/seed/related-${i}/800/450')`}></div>
+            </div>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold">Location {i + 1}</h4>
+              <p class="text-sm text-primary/70 dark:text-white/70 mt-1">Suggested nearby attraction.</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>

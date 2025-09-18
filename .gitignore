@@ -1,0 +1,37 @@
+node_modules
+.astro
+dist
+.DS_Store
+Thumbs.db
+/*.log
+.env
+# All env variants (keep example tracked)
+.env.*
+!.env.example
+
+# Package managers config that may hold tokens
+.npmrc
+.yarnrc
+.yarnrc.yml
+.pnpmrc
+
+# Hosting provider local state
+.vercel
+.netlify
+
+# IDE/editor and local tooling
+.idea
+.vscode/
+.vs/
+
+# Keys & certificates (never commit secrets)
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+*.cer
+
+# Local caches
+.cache
+.turbo

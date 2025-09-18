@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import stringsTr from '@i18n/tr.json';
+import stringsEn from '@i18n/en.json';
+import stringsPl from '@i18n/pl.json';
+import { isLang, type Lang } from '@lib/i18n';
+import { langStaticPaths } from '@lib/staticPaths';
+import { loadSettings, loadPlaces, loadTestimonials } from '@lib/content';
+import HomeHero from '@sections/HomeHero.astro';
+import PlacesSection from '@sections/PlacesSection.astro';
+import GallerySection from '@sections/GallerySection.astro';
+import AboutSection from '@sections/AboutSection.astro';
+import TestimonialsSection from '@sections/TestimonialsSection.astro';
+import ContactSection from '@sections/ContactSection.astro';
+
+export const getStaticPaths = langStaticPaths;
+
+const langParam = Astro.params.lang;
+const lang: Lang = isLang(langParam) ? (langParam as Lang) : 'tr';
+const dict = lang === 'en' ? stringsEn : lang === 'pl' ? stringsPl : stringsTr;
+
+const settings = loadSettings();
+const places = loadPlaces(lang);
+const testimonials = loadTestimonials(lang);
+const whatsapp = settings.whatsapp_number || '+90XXXXXXXXXX';
+const email = settings.email || 'yusuf.ozkan@example.com';
+const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURIComponent('Merhaba! Özel tur hakkında bilgi almak istiyorum.')}`;
+---
+<BaseLayout title={dict.siteTitle} lang={lang}>
+  <Navbar lang={lang} />
+  <main>
+    <HomeHero lang={lang} title="Discover the Magic of Istanbul" subtitle="Your personal guide to the heart of history and culture." waHref={waHref} ctaPrimary={dict.cta.primary} ctaSecondary={dict.cta.secondary} />
+    <PlacesSection lang={lang} places={places} />
+    <GallerySection />
+    <AboutSection ownerName={settings.owner_name} ownerTitle={settings.owner_title} />
+    <TestimonialsSection testimonials={testimonials} />
+    <ContactSection waHref={waHref} email={email} />
+  </main>
+</BaseLayout>
+

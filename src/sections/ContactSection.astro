@@ -1,0 +1,37 @@
+---
+const { waHref, email } = Astro.props as { waHref: string; email: string };
+---
+<section id="contact" class="scroll-mt-16 container-max py-16">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-4">Get in Touch</h2>
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-12">For inquiries about private tours in Istanbul, reach out via WhatsApp or email, or use the form below.</p>
+  </div>
+  <div class="max-w-lg mx-auto bg-white dark:bg-background-dark rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
+    <div class="p-8">
+      <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <a target="_blank" href={waHref} class="w-full flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 transition-colors">WhatsApp</a>
+        <a href={`mailto:${email}`} class="w-full flex items-center justify-center gap-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Email</a>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Thanks!');">
+        <div class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+            <input id="name" type="text" class="mt-1 w-full rounded-lg bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-primary text-gray-900 dark:text-white" placeholder="Your Name" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+            <input id="email" type="email" class="mt-1 w-full rounded-lg bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-primary text-gray-900 dark:text-white" placeholder="you@example.com" />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+            <textarea id="message" rows="4" class="mt-1 w-full rounded-lg bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:border-primary focus:ring-primary text-gray-900 dark:text-white" placeholder="Your message..."></textarea>
+          </div>
+        </div>
+        <div class="mt-8">
+          <button type="submit" class="w-full flex justify-center py-3 px-4 rounded-lg text-sm font-bold text-white bg-primary hover:bg-opacity-90 focus:outline-none">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+

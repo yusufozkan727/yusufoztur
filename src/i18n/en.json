@@ -1,0 +1,16 @@
+{
+  "siteTitle": "Istanbul Private Tours",
+  "nav": {
+    "home": "Home",
+    "places": "Places",
+    "gallery": "Gallery",
+    "about": "About",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "cta": {
+    "primary": "Chat on WhatsApp",
+    "secondary": "Explore Places"
+  }
+}
+

@@ -1,0 +1,22 @@
+---
+const { title = 'Site', lang = 'tr' } = Astro.props as { title?: string; lang?: string };
+import "@styles/tailwind.css";
+import Footer from "@components/Footer.astro";
+---
+<!doctype html>
+<html lang={lang} class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  </head>
+  <body class="min-h-full antialiased bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <slot />
+    <Footer />
+  </body>
+</html>

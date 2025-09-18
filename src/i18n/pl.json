@@ -1,0 +1,16 @@
+{
+  "siteTitle": "Prywatne wycieczki po Stambule",
+  "nav": {
+    "home": "Start",
+    "places": "Miejsca",
+    "gallery": "Galeria",
+    "about": "O mnie",
+    "testimonials": "Opinie",
+    "contact": "Kontakt"
+  },
+  "cta": {
+    "primary": "Napisz na WhatsApp",
+    "secondary": "Odkryj miejsca"
+  }
+}
+

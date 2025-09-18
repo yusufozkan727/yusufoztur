@@ -1,0 +1,16 @@
+{
+  "siteTitle": "İstanbul Özel Turlar",
+  "nav": {
+    "home": "Ana Sayfa",
+    "places": "Mekanlar",
+    "gallery": "Galeri",
+    "about": "Hakkımda",
+    "testimonials": "Yorumlar",
+    "contact": "İletişim"
+  },
+  "cta": {
+    "primary": "WhatsApp ile iletişim",
+    "secondary": "Mekanları keşfet"
+  }
+}
+

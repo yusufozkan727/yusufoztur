@@ -1,0 +1,21 @@
+---
+const { lang, title, subtitle, waHref, ctaPrimary, ctaSecondary } = Astro.props as {
+  lang: string;
+  title: string;
+  subtitle: string;
+  waHref: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+};
+---
+<section id="home" class="scroll-mt-16 relative h-[60vh] md:h-[80vh] flex items-center justify-center text-center bg-cover bg-center" style={"background-image: linear-gradient(rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuApHL2QV2zg_ylFKXeJtBt3UgrY2bjeK8WOmeJSmLuyIyJo9jzA-J_-TNybtwvLch3puFN4n76TrSTjqzIGa6htYfMrqjOLLBR2bC92R80KM8luojPVCGhKZ1TrdPf5OdS54vjMa9KgJD5Z7TroMSqoKqqToP4ehwApONwDAjoAK_9tJJIOy77xon5jnLgv2cUS17cZqqDmwlmLaPFza2bpRt9SYcAwaqFaFio3k7f-_DCWkjeUW7K-vfMUY8yjuHgdMnurvrPT1Gs')"}>
+  <div class="container-max text-white">
+    <h1 class="text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg">{title}</h1>
+    <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md">{subtitle}</p>
+    <div class="mt-8 flex items-center justify-center gap-3">
+      <a href={waHref} class="rounded-lg h-12 px-6 inline-flex items-center justify-center bg-primary text-white text-base font-bold shadow-lg hover:bg-primary/90 transition">{ctaPrimary}</a>
+      <a href={`/${lang}#places`} class="rounded-lg h-12 px-6 inline-flex items-center justify-center bg-white/90 text-gray-900 font-semibold hover:bg-white">{ctaSecondary}</a>
+    </div>
+  </div>
+</section>
+

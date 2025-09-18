@@ -1,0 +1,167 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+<BaseLayout title="Admin Lite" lang="tr">
+  <main class="container-max py-10">
+    <h1 class="text-2xl font-bold mb-4">Admin Lite</h1>
+    <p class="text-sm text-slate-600 mb-6">Bu panel yalnızca içerik (content/*) dosyalarını günceller. Üyelik gerekmez. Şifre ile korunur.</p>
+
+    <section class="border rounded p-4 mb-6">
+      <h2 class="font-semibold mb-2">1) Giriş</h2>
+      <div class="flex gap-2 items-center">
+        <input id="pass" type="password" placeholder="Admin password" class="border rounded px-3 py-2 w-64" />
+        <button id="save-pass" class="px-3 py-2 rounded bg-primary text-white">Kaydet</button>
+        <span id="pass-status" class="text-xs text-slate-500 ml-2"></span>
+      </div>
+    </section>
+
+    <section class="border rounded p-4 mb-6">
+      <h2 class="font-semibold mb-2">2) Settings.json</h2>
+      <textarea id="settings" class="border rounded w-full h-40 p-2 font-mono text-sm"></textarea>
+      <div class="mt-2 flex gap-2">
+        <button data-action="settings" class="push px-3 py-2 rounded bg-primary text-white">Kaydet</button>
+        <span class="hint text-xs text-slate-500"></span>
+      </div>
+    </section>
+
+    <section class="border rounded p-4 mb-6">
+      <h2 class="font-semibold mb-2">3) Home (content/home.md)</h2>
+      <div class="grid md:grid-cols-2 gap-2">
+        <input id="home-lang" class="border rounded px-2 py-1" placeholder="lang (tr/en/pl)" />
+        <input id="home-title" class="border rounded px-2 py-1" placeholder="hero_title" />
+        <input id="home-sub" class="border rounded px-2 py-1" placeholder="hero_subtitle" />
+        <input id="home-cta1" class="border rounded px-2 py-1" placeholder="primary_cta" />
+        <input id="home-cta2" class="border rounded px-2 py-1" placeholder="secondary_cta" />
+      </div>
+      <div class="mt-2 flex gap-2">
+        <button data-action="home" class="push px-3 py-2 rounded bg-primary text-white">Kaydet</button>
+        <span class="hint text-xs text-slate-500"></span>
+      </div>
+    </section>
+
+    <section class="border rounded p-4 mb-6">
+      <h2 class="font-semibold mb-2">4) Contact (content/contact.md)</h2>
+      <div class="grid md:grid-cols-2 gap-2">
+        <input id="contact-lang" class="border rounded px-2 py-1" placeholder="lang (tr/en/pl)" />
+        <input id="contact-wa" class="border rounded px-2 py-1" placeholder="whatsapp (+90...)" />
+        <input id="contact-email" class="border rounded px-2 py-1" placeholder="email" />
+        <input id="contact-msg" class="border rounded px-2 py-1" placeholder="prefilled msg" />
+      </div>
+      <div class="mt-2 flex gap-2">
+        <button data-action="contact" class="push px-3 py-2 rounded bg-primary text-white">Kaydet</button>
+        <span class="hint text-xs text-slate-500"></span>
+      </div>
+    </section>
+
+    <section class="border rounded p-4 mb-6">
+      <h2 class="font-semibold mb-2">5) Yeni Yorum (testimonial)</h2>
+      <div class="grid md:grid-cols-2 gap-2">
+        <input id="t-lang" class="border rounded px-2 py-1" placeholder="lang (tr/en/pl)" />
+        <input id="t-name" class="border rounded px-2 py-1" placeholder="name" />
+        <input id="t-rating" class="border rounded px-2 py-1" placeholder="rating (1-5)" />
+        <input id="t-date" class="border rounded px-2 py-1" placeholder="date (YYYY-MM-DD)" />
+        <input id="t-avatar" class="border rounded px-2 py-1" placeholder="avatar path (/images/uploads/...)" />
+      </div>
+      <textarea id="t-quote" class="border rounded w-full h-24 p-2 font-mono text-sm mt-2" placeholder="quote"></textarea>
+      <div class="mt-2 flex gap-2">
+        <button data-action="testimonial" class="push px-3 py-2 rounded bg-primary text-white">Ekle</button>
+        <span class="hint text-xs text-slate-500"></span>
+      </div>
+    </section>
+
+    <section class="border rounded p-4 mb-6">
+      <h2 class="font-semibold mb-2">6) Yeni Mekan (place)</h2>
+      <div class="grid md:grid-cols-2 gap-2">
+        <input id="p-lang" class="border rounded px-2 py-1" placeholder="lang (tr/en/pl)" />
+        <input id="p-slug" class="border rounded px-2 py-1" placeholder="slug (opsiyonel)" />
+        <input id="p-title" class="border rounded px-2 py-1" placeholder="title" />
+        <input id="p-summary" class="border rounded px-2 py-1" placeholder="summary" />
+        <input id="p-cover" class="border rounded px-2 py-1" placeholder="cover (/images/places/...)" />
+        <input id="p-open" class="border rounded px-2 py-1" placeholder="open days/hours" />
+        <input id="p-ticket" class="border rounded px-2 py-1" placeholder="ticket note" />
+        <input id="p-location-name" class="border rounded px-2 py-1" placeholder="location.name" />
+        <input id="p-location-lat" class="border rounded px-2 py-1" placeholder="location.lat" />
+        <input id="p-location-lng" class="border rounded px-2 py-1" placeholder="location.lng" />
+      </div>
+      <textarea id="p-body" class="border rounded w-full h-28 p-2 font-mono text-sm mt-2" placeholder="Markdown body"></textarea>
+      <div class="mt-2 flex gap-2">
+        <button data-action="place" class="push px-3 py-2 rounded bg-primary text-white">Ekle/Güncelle</button>
+        <span class="hint text-xs text-slate-500"></span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = (sel) => document.querySelector(sel);
+    const status = (el, text, ok = true) => { el.textContent = text; el.style.color = ok ? 'green' : 'crimson'; setTimeout(()=> el.textContent = '', 3000); };
+    const passInput = $('#pass');
+    const passStatus = $('#pass-status');
+    const saved = localStorage.getItem('admin_pass');
+    if (saved) { passInput.value = saved; passStatus.textContent = 'Şifre yüklendi'; }
+    $('#save-pass').addEventListener('click', () => { localStorage.setItem('admin_pass', passInput.value || ''); passStatus.textContent = 'Kaydedildi'; });
+
+    // Prefill settings with current settings.json (static fetch)
+    fetch('/content/settings.json').then(r=>r.ok?r.json():{}).then(j=> $('#settings').value = JSON.stringify(j, null, 2)).catch(()=>{});
+
+    async function push(action, payload, hintEl) {
+      const password = localStorage.getItem('admin_pass') || '';
+      if (!password) { status(hintEl, 'Önce şifre girin', false); return; }
+      const res = await fetch('/api/update-content', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-admin-password': password },
+        body: JSON.stringify({ type: action, ...payload })
+      });
+      const j = await res.json();
+      if (j.ok) status(hintEl, 'Başarılı ✓'); else status(hintEl, j.error || 'Hata', false);
+    }
+
+    document.querySelectorAll('button.push').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action');
+        const hint = btn.parentElement.querySelector('.hint');
+        if (action === 'settings') {
+          let data = {};
+          try { data = JSON.parse($('#settings').value || '{}'); } catch(e) {}
+          push('settings', { data }, hint);
+        } else if (action === 'home') {
+          push('home', { lang: $('#home-lang').value, data: {
+            hero_title: $('#home-title').value,
+            hero_subtitle: $('#home-sub').value,
+            primary_cta: $('#home-cta1').value,
+            secondary_cta: $('#home-cta2').value,
+          } }, hint);
+        } else if (action === 'contact') {
+          push('contact', { lang: $('#contact-lang').value, data: {
+            whatsapp: $('#contact-wa').value,
+            email: $('#contact-email').value,
+            msg: $('#contact-msg').value,
+          } }, hint);
+        } else if (action === 'testimonial') {
+          push('testimonial', { lang: $('#t-lang').value, data: {
+            name: $('#t-name').value,
+            rating: $('#t-rating').value,
+            date: $('#t-date').value,
+            avatar: $('#t-avatar').value,
+            quote: $('#t-quote').value,
+          } }, hint);
+        } else if (action === 'place') {
+          push('place', { lang: $('#p-lang').value, data: {
+            slug: $('#p-slug').value,
+            title: $('#p-title').value,
+            summary: $('#p-summary').value,
+            cover: $('#p-cover').value,
+            open: $('#p-open').value,
+            ticket: $('#p-ticket').value,
+            location: {
+              name: $('#p-location-name').value,
+              lat: Number($('#p-location-lat').value || 0),
+              lng: Number($('#p-location-lng').value || 0),
+            },
+            body: $('#p-body').value,
+          } }, hint);
+        }
+      });
+    });
+  </script>
+</BaseLayout>
+
