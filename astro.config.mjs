@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // Prod'da GitHub Pages alt dizini, dev'de kök
 const isProd = process.env.NODE_ENV === 'production';
@@ -11,6 +12,7 @@ export default defineConfig({
   output: 'static',
   site,
   base,
+  integrations: [sitemap()],
   server: { port: 4321 },
   vite: {
     server: { fs: { strict: false } },

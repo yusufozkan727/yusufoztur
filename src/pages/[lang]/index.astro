@@ -19,6 +19,15 @@ export const getStaticPaths = langStaticPaths;
 const langParam = Astro.params.lang;
 const lang: Lang = isLang(langParam) ? (langParam as Lang) : 'tr';
 const dict = lang === 'en' ? stringsEn : lang === 'pl' ? stringsPl : stringsTr;
+const BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const site = import.meta.env.SITE || 'http://localhost:4321';
+const alternates = [
+  { hrefLang: 'tr', href: new URL(`${BASE}tr/`, site).toString() },
+  { hrefLang: 'en', href: new URL(`${BASE}en/`, site).toString() },
+  { hrefLang: 'pl', href: new URL(`${BASE}pl/`, site).toString() },
+  { hrefLang: 'x-default', href: new URL(`${BASE}tr/`, site).toString() },
+];
+const description = 'Licensed tour guide in Istanbul. Private tours in TR/EN/PL.';
 
 const settings = loadSettings();
 const places = loadPlaces(lang);
@@ -28,6 +37,24 @@ const email = settings.email || 'yusuf.ozkan@example.com';
 const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURIComponent('Merhaba! Özel tur hakkında bilgi almak istiyorum.')}`;
 ---
 <BaseLayout title={dict.siteTitle} lang={lang}>
+  <Fragment slot="head">
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(`${BASE}${lang}/`, site).toString()} />
+    <link rel="alternate" hrefLang="tr" href={alternates[0].href} />
+    <link rel="alternate" hrefLang="en" href={alternates[1].href} />
+    <link rel="alternate" hrefLang="pl" href={alternates[2].href} />
+    <link rel="alternate" hrefLang="x-default" href={alternates[3].href} />
+    <script type="application/ld+json">{JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: settings.owner_name || 'Yusuf Özkan',
+      description,
+      url: new URL(`${BASE}${lang}/`, site).toString(),
+      areaServed: 'Istanbul',
+      email: settings.email,
+      sameAs: Object.values(settings.socials || {}).filter(Boolean),
+    })}</script>
+  </Fragment>
   <Navbar lang={lang} />
   <main>
     <HomeHero lang={lang} title="Discover the Magic of Istanbul" subtitle="Your personal guide to the heart of history and culture." waHref={waHref} ctaPrimary={dict.cta.primary} ctaSecondary={dict.cta.secondary} />
@@ -38,4 +65,3 @@ const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURI
     <ContactSection waHref={waHref} email={email} />
   </main>
 </BaseLayout>
-

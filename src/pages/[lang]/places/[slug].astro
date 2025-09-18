@@ -36,8 +36,13 @@ if (!page) {
 }
 
 const { frontmatter, Content } = page;
+const description = frontmatter.summary || `Discover ${frontmatter.title} in Istanbul.`;
 ---
 <BaseLayout title={frontmatter.title} lang={lang}>
+  <Fragment slot="head">
+    <meta name="description" content={description} />
+    {frontmatter.cover && <meta property="og:image" content={frontmatter.cover} />}
+  </Fragment>
   <Navbar lang={lang} />
   <main class="container-max py-8">
     {frontmatter.cover && (
