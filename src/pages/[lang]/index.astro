@@ -32,6 +32,10 @@ const description = 'Licensed tour guide in Istanbul. Private tours in TR/EN/PL.
 const settings = loadSettings();
 const places = loadPlaces(lang);
 const testimonials = loadTestimonials(lang);
+const reviewCount = testimonials.length;
+const averageRating = reviewCount ? (
+  testimonials.reduce((sum: number, t: any) => sum + (Number(t.rating) || 0), 0) / reviewCount
+).toFixed(1) : undefined;
 const whatsapp = settings.whatsapp_number || '+90XXXXXXXXXX';
 const email = settings.email || 'yusuf.ozkan@example.com';
 const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURIComponent('Merhaba! Özel tur hakkında bilgi almak istiyorum.')}`;
@@ -44,6 +48,19 @@ const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURI
     <link rel="alternate" hrefLang="en" href={alternates[1].href} />
     <link rel="alternate" hrefLang="pl" href={alternates[2].href} />
     <link rel="alternate" hrefLang="x-default" href={alternates[3].href} />
+    {averageRating && (
+      <script type="application/ld+json">{JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'AggregateRating',
+        itemReviewed: {
+          '@type': 'LocalBusiness',
+          name: settings.owner_name || 'Yusuf Özkan',
+          url: new URL(`${BASE}${lang}/`, site).toString()
+        },
+        ratingValue: Number(averageRating),
+        reviewCount
+      })}</script>
+    )}
     <script type="application/ld+json">{JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',

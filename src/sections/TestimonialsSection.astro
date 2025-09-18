@@ -7,7 +7,7 @@ const { testimonials } = Astro.props as { testimonials: any[] };
     {testimonials.map((t) => (
       <div class="bg-background-light dark:bg-background-dark p-6 rounded-xl shadow-md">
         <div class="flex items-center gap-4 mb-4">
-          {t.avatar && <img src={t.avatar} class="h-12 w-12 rounded-full object-cover" alt="" />}
+          {t.avatar && <img src={t.avatar} class="h-12 w-12 rounded-full object-cover" alt={t.name} loading="lazy" decoding="async" width="48" height="48" />}
           <div>
             <p class="font-bold text-gray-900 dark:text-white">{t.name}</p>
             <p class="text-sm text-gray-500 dark:text-gray-400">{new Date(t.date).toLocaleDateString()}</p>
@@ -23,4 +23,3 @@ const { testimonials } = Astro.props as { testimonials: any[] };
     ))}
   </div>
 </section>
-

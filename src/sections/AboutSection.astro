@@ -5,7 +5,7 @@ const { ownerName = 'Yusuf Özkan', ownerTitle = 'Licensed Tour Guide' } = Astro
   <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
     <div class="lg:col-span-2">
       <div class="rounded-xl overflow-hidden shadow-lg">
-        <img src="https://picsum.photos/seed/guide/800/1000" alt={`Portrait of ${ownerName}`} class="w-full h-full object-cover" />
+        <img src="https://picsum.photos/seed/guide/800/1000" alt={`Portrait of ${ownerName}`} class="w-full h-full object-cover" loading="lazy" decoding="async" width="800" height="1000" />
       </div>
     </div>
     <div class="lg:col-span-3">
@@ -14,4 +14,3 @@ const { ownerName = 'Yusuf Özkan', ownerTitle = 'Licensed Tour Guide' } = Astro
     </div>
   </div>
 </section>
-

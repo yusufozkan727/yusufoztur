@@ -5,10 +5,9 @@
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     {Array.from({ length: 8 }).map((_, i) => (
       <a href="#" class="group relative block overflow-hidden rounded-lg">
-        <img src={`https://picsum.photos/seed/istanbul-${i}/800/800`} alt="Gallery image" class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <img src={`https://picsum.photos/seed/istanbul-${i}/800/800`} alt="Gallery image" class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" decoding="async" width="800" height="800" />
         <div class="absolute inset-0 bg-black/20 opacity-0 transition-opacity group-hover:opacity-100" />
       </a>
     ))}
   </div>
 </section>
-
