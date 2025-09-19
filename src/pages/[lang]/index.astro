@@ -6,7 +6,7 @@ import stringsEn from '@i18n/en.json';
 import stringsPl from '@i18n/pl.json';
 import { isLang, type Lang } from '@lib/i18n';
 import { langStaticPaths } from '@lib/staticPaths';
-import { loadSettings, loadPlaces, loadTestimonials } from '@lib/content';
+import { loadSettings, loadPlaces, loadTestimonials, loadHome, loadAbout, loadContact } from '@lib/content';
 import HomeHero from '@sections/HomeHero.astro';
 import PlacesSection from '@sections/PlacesSection.astro';
 import GallerySection from '@sections/GallerySection.astro';
@@ -35,6 +35,9 @@ const description = 'Lisanslı tur rehberi Yusuf Özkan ile İstanbul’un tarih
 const settings = loadSettings();
 const places = loadPlaces(lang);
 const testimonials = loadTestimonials(lang);
+const home = loadHome(lang);
+const about = loadAbout(lang);
+const contact = loadContact(lang);
 const reviewCount = testimonials.length;
 const averageRating = reviewCount ? (
   testimonials.reduce((sum: number, t: any) => sum + (Number(t.rating) || 0), 0) / reviewCount
@@ -44,26 +47,26 @@ const email = settings.email || 'yusuf.ozkan@example.com';
 const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURIComponent('Merhaba! Özel tur hakkında bilgi almak istiyorum.')}`;
 ---
 <BaseLayout title={dict.siteTitle} lang={lang}>
-    <Fragment slot="head">
+      <Fragment slot="head">
     <!-- Canonical -->
     <link rel="canonical" href={canonical} />
     <!-- Meta -->
     <meta name="description" content={description} />
-    <link rel="alternate" hrefLang="tr" href=\{`    <link rel="alternate" hrefLang="tr" href={HOST`}/yusufoztur/tr/} />
-    <link rel="alternate" hrefLang="en" href=\{`    <link rel="alternate" hrefLang="en" href={HOST`}/yusufoztur/en/} />
-    <link rel="alternate" hrefLang="pl" href=\{`    <link rel="alternate" hrefLang="pl" href={HOST`}/yusufoztur/pl/} />
-    <link rel="alternate" hrefLang="x-default" href=\{`    <link rel="alternate" hrefLang="x-default" href={HOST`}/yusufoztur/tr/} />
+    <link rel="alternate" hrefLang="tr" href={`${HOST}/yusufoztur/tr/`} />
+    <link rel="alternate" hrefLang="en" href={`${HOST}/yusufoztur/en/`} />
+    <link rel="alternate" hrefLang="pl" href={`${HOST}/yusufoztur/pl/`} />
+    <link rel="alternate" hrefLang="x-default" href={`${HOST}/yusufoztur/tr/`} />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="İstanbul Özel Turlar — Yusuf Özkan" />
     <meta property="og:description" content="Lisanslı tur rehberi Yusuf Özkan ile İstanbul’un tarihî ve kültürel mirasını keşfedin. TR/EN/PL özel turlar." />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content=\{`    <meta property="og:image" content={HOST`}/yusufoztur/images/sample1.jpg} />
+    <meta property="og:image" content={`${HOST}/yusufoztur/images/sample1.jpg`} />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="İstanbul Özel Turlar — Yusuf Özkan" />
     <meta name="twitter:description" content="Lisanslı tur rehberi Yusuf Özkan ile İstanbul’un tarihî ve kültürel mirasını keşfedin. TR/EN/PL özel turlar." />
-    <meta name="twitter:image" content=\{`    <meta name="twitter:image" content={HOST`}/yusufoztur/images/sample1.jpg} />
+    <meta name="twitter:image" content={`${HOST}/yusufoztur/images/sample1.jpg`} />
     <!-- JSON-LD: Person -->
     <script type="application/ld+json">{JSON.stringify({
       '@context': 'https://schema.org',
@@ -86,11 +89,11 @@ const waHref = `https://wa.me/${whatsapp.replace(/[^+\d]/g,'')}?text=${encodeURI
   </Fragment>
   <Navbar lang={lang} />
   <main>
-    <HomeHero lang={lang} title="Discover the Magic of Istanbul" subtitle="Your personal guide to the heart of history and culture." waHref={waHref} ctaPrimary={dict.cta.primary} ctaSecondary={dict.cta.secondary} />
+    <HomeHero lang={lang} title={home?.hero_title || 'Discover the Magic of Istanbul'} subtitle={home?.hero_subtitle || 'Your personal guide to the heart of history and culture.'} waHref={waHref} ctaPrimary={home?.primary_cta || dict.cta.primary} ctaSecondary={home?.secondary_cta || dict.cta.secondary} />
     <PlacesSection lang={lang} places={places} />
     <GallerySection />
-    <AboutSection ownerName={settings.owner_name} ownerTitle={settings.owner_title} />
+    <AboutSection ownerName={settings.owner_name} ownerTitle={settings.owner_title} portrait={about?.portrait} body={about?.body} />
     <TestimonialsSection testimonials={testimonials} />
-    <ContactSection waHref={waHref} email={email} />
+    <ContactSection waHref={waHref} email={contact?.email || email} />
   </main>
 </BaseLayout>
