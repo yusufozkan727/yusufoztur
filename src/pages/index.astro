@@ -11,7 +11,9 @@ const BASE = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
       const stored = localStorage.getItem('lang');
       const navLang = stored || (navigator.language || 'tr').slice(0,2);
       const to = supported.includes(navLang) ? `${BASE}${navLang}/` : `${BASE}tr/`;
-      if (location.pathname === BASE && to !== BASE) location.replace(to);
+      const baseNoSlash = BASE.endsWith('/') ? BASE.slice(0, -1) : BASE;
+      const path = location.pathname.replace(/\/index\.html?$/, '');
+      if ((path === BASE || path === baseNoSlash) && to !== BASE) location.replace(to);
     } catch {}
   </script>
   <div class="container-max py-16">
