@@ -1,19 +1,20 @@
 ﻿backend:
   name: github
   # GitHub kullanÄ±cÄ± adÄ±nÄ±zÄ± "USERNAME" yerine yazÄ±n
-  repo: yusufoztekin/yusufoztur
+  repo: yusufozkan727/yusufoztur
   branch: main
   # OAuth saÄŸlayÄ±cÄ±nÄ±zÄ± (Vercel) girin. AÅŸaÄŸÄ±daki rehbere bakÄ±n.
-  base_url: https://YOUR-OAUTH-APP.vercel.app
+  base_url: https://yusufoztur.vercel.app
   auth_endpoint: /api/auth
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
-site_url: "/"
-display_url: "/"
+site_url: 'https://yusufozkan727.github.io/yusufoztur/'
+display_url: 'https://yusufozkan727.github.io/yusufoztur/'
 
 local_backend: false
+publish_mode: simple
 
 collections:
   # Tekil sayfalar
@@ -149,4 +150,5 @@ collections:
       - { label: AlÄ±ntÄ±, name: quote, widget: text }
       - { label: Tarih, name: date, widget: datetime, format: "YYYY-MM-DD" }
       - { label: Avatar, name: avatar, widget: image, required: false }
+
 
