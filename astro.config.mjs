@@ -1,12 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Prod'da GitHub Pages alt dizini, dev'de kök
-const isProd = process.env.NODE_ENV === 'production';
-const site = isProd
-  ? 'https://yusufozkan727.github.io/yusufoztur'
-  : 'http://localhost:4321';
-const base = isProd ? '/yusufoztur' : '/';
+const isNetlify = process.env.NETLIFY === 'true' || process.env.DEPLOY_TARGET === 'netlify';
+const site = isNetlify ? (process.env.URL || 'http://localhost:4321') : 'https://yusufozkan727.github.io/yusufoztur';
+const base = isNetlify ? '/' : '/yusufoztur';
 
 export default defineConfig({
   output: 'static',
@@ -18,3 +15,4 @@ export default defineConfig({
     server: { fs: { strict: false } },
   },
 });
+

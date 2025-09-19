@@ -150,3 +150,130 @@ collections:
       - { label: AlÄ±ntÄ±, name: quote, widget: text }
       - { label: Tarih, name: date, widget: datetime, format: "YYYY-MM-DD" }
       - { label: Avatar, name: avatar, widget: image, required: false }
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: "https://yusufozkan727.github.io/yusufoztur/"
+display_url: "https://yusufozkan727.github.io/yusufoztur/"
+
+publish_mode: simple
+local_backend: false
+
+collections:
+  # Tekil sayfalar
+  - name: pages
+    label: Sayfalar
+    files:
+      - file: "content/home.md"
+        name: home
+        label: Ana Sayfa
+        fields:
+          - { label: Dil, name: lang, widget: string, default: tr }
+          - { label: Başlık, name: hero_title, widget: string }
+          - { label: Alt Başlık, name: hero_subtitle, widget: text }
+          - { label: Birincil CTA, name: primary_cta, widget: string }
+          - { label: İkincil CTA, name: secondary_cta, widget: string }
+
+      - file: "content/about.md"
+        name: about
+        label: Hakkımda
+        fields:
+          - { label: Dil, name: lang, widget: string, default: tr }
+          - { label: Başlık, name: title, widget: string }
+          - { label: Portre, name: portrait, widget: image }
+          - { label: Gövde (Markdown), name: body, widget: markdown }
+
+      - file: "content/contact.md"
+        name: contact
+        label: İletişim
+        fields:
+          - { label: Dil, name: lang, widget: string, default: tr }
+          - { label: WhatsApp, name: whatsapp, widget: string }
+          - { label: E-posta, name: email, widget: string }
+          - { label: Mesaj Şablonu, name: msg, widget: text }
+
+      - file: "content/settings.json"
+        name: settings
+        label: Ayarlar
+        format: json
+        fields:
+          - { label: Sahip Adı, name: owner_name, widget: string }
+          - { label: Ünvan, name: owner_title, widget: string }
+          - { label: WhatsApp, name: whatsapp_number, widget: string }
+          - { label: E-posta, name: email, widget: string }
+          - label: Sosyaller
+            name: socials
+            widget: object
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: Facebook, name: facebook, widget: string, required: false }
+          - { label: Birincil CTA, name: primary_cta_text, widget: string }
+          - { label: İkincil CTA, name: secondary_cta_text, widget: string }
+
+  # Turlar
+  - name: tours
+    label: Turlar
+    folder: "content/tours"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: frontmatter
+    fields:
+      - { label: Dil, name: lang, widget: string, default: tr }
+      - { label: Başlık, name: title, widget: string }
+      - { label: Süre, name: duration, widget: string }
+      - { label: Fiyat Bilgisi, name: price_info, widget: string }
+      - { label: Dahil Olanlar, name: includes, widget: list, field: { label: Öğe, name: item, widget: string } }
+      - { label: Rota, name: itinerary, widget: list, field: { label: Adım, name: step, widget: string } }
+      - { label: Kapak Görseli, name: cover, widget: image }
+      - label: Galeri
+        name: gallery
+        widget: list
+        fields:
+          - { label: Görsel, name: src, widget: image }
+          - { label: Alternatif Metin, name: alt, widget: string }
+
+  # Mekanlar
+  - name: places
+    label: Mekanlar
+    folder: "content/places"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: frontmatter
+    fields:
+      - { label: Dil, name: lang, widget: string, default: tr }
+      - { label: Kısa Ad, name: slug, widget: string }
+      - { label: Başlık, name: title, widget: string }
+      - { label: Özet, name: summary, widget: text }
+      - { label: Kapak Görseli, name: cover, widget: image }
+      - label: Konum
+        name: location
+        widget: object
+        fields:
+          - { label: Ad, name: name, widget: string }
+          - { label: Enlem, name: lat, widget: number, value_type: float }
+          - { label: Boylam, name: lng, widget: number, value_type: float }
+      - { label: Açık Saatler, name: open, widget: string, required: false }
+      - { label: Bilet, name: ticket, widget: string, required: false }
+      - { label: İçerik, name: body, widget: markdown, required: false }
+
+  # Yorumlar
+  - name: testimonials
+    label: Yorumlar
+    folder: "content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: frontmatter
+    fields:
+      - { label: Dil, name: lang, widget: string, default: tr }
+      - { label: İsim, name: name, widget: string }
+      - { label: Puan, name: rating, widget: number, min: 1, max: 5, step: 1 }
+      - { label: Alıntı, name: quote, widget: text }
+      - { label: Tarih, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Avatar, name: avatar, widget: image, required: false }
