@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://yusufozkan727.github.io/yusufoztur/sitemap.xml
